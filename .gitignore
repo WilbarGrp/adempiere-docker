@@ -1,6 +1,2 @@
-postgresql/dist/Adempiere*
-wilbar/*
-wilbar
-zwg/migration/ZWG_0.1
 *.tar.gz
 *.iml
