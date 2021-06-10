@@ -55,8 +55,7 @@ docker cp $BACKUP_FILE2 postgres132_db_1:/tmp
 docker exec postgres132_db_1 psql -U $TO_DB -d $TO_DB -f "/tmp/$BACKUP_FILE2"
 Write-Output "ALTER SCHEMA $FROM_DB RENAME TO $TO_DB;" | docker exec -i postgres132_db_1 psql -U $TO_DB 
 Write-Output "REASSIGN OWNED BY $FROM_DB TO $TO_DB;" | docker exec -i postgres132_db_1 psql -U @TO_DB 
-docker start $FROM_DB
+
 docker start $TO_DB
+
 Remove-Item $BACKUP_FILE2
-
-

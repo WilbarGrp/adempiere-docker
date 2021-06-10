@@ -73,26 +73,26 @@ if ((docker network inspect -f '{{.Name}}' custom) -ne "custom"){
     docker network create -d bridge custom
 }
 
-$PG_VERSION = "$env:PG_VERSION".Replace(".",'')
+#$PG_VERSION = "$env:PG_VERSION".Replace(".",'')
 #$env:PG_VERSION = $PG_VERSION
-Write-Output "$PG_VERSION"
+#Write-Output "$PG_VERSION"
 Write-Output $env:PG_VERSION
 
 $RUNNING=docker inspect --format="{{.State.Running}}" postgres"$env:PG_VERSION"_db_1
 if ($RUNNING -eq ""){
     Write-Output "Dababase container does not exist."
     Write-Output "Create Database container"
-      docker-compose -f "$BASE_DIR/database.yml" -f "$BASE_DIR/database.volume.yml" -p postgres$env:PG_VERSION up -d
+      docker-compose -f "$BASE_DIR/database.yml" -f "$BASE_DIR/database.volume.yml" -p postgres:$env:PG_VERSION up -d
 }
 
 if ($RUNNING -eq "false"){
     Write-Output "CRITICAL - postgres"$env:PG_VERSION"_db_1 is not running."
     Write-Output "Starting Database"
-    docker-compose -f "$BASE_DIR/database.yml" -f "$BASE_DIR/database.volume.yml" -p postgres$env:PG_VERSION start
+    docker-compose -f "$BASE_DIR/database.yml" -f "$BASE_DIR/database.volume.yml" -p postgres:$env:PG_VERSION start
 }
 
 if ($RUNNING -eq "true"){
-    docker-compose -f "$BASE_DIR/database.yml" -f "$BASE_DIR/database.volume.yml" -p postgres$env:PG_VERSION config
+    docker-compose -f "$BASE_DIR/database.yml" -f "$BASE_DIR/database.volume.yml" -p postgres:$env:PG_VERSION config
 }
 
 
