@@ -30,8 +30,12 @@ then
     fi
 fi
 
-echo "backup actual db just in case ;-)"
-docker exec -t postgres132_db_1 pg_dump -U $TO_DB $TO_DB --no-owner > ./$myFileName
+#echo "backup actual db just in case ;-)"
+#docker exec -t postgres132_db_1 pg_dump -U $TO_DB $TO_DB --no-owner > ./$myFileName
+
+gunzip $BACKUP_FILE
+BACKUP_FILE=${BACKUP_FILE%.gz}
+docker cp $BACKUP_FILE postgres132_db_1:/tmp
 
 docker stop $TO_DB
 docker stop postgres132_db_1
@@ -39,8 +43,8 @@ docker start postgres132_db_1
 docker exec -it postgres132_db_1 dropdb -U $TO_DB $TO_DB
 docker exec -it postgres132_db_1 createdb -U $TO_DB -E unicode $TO_DB
 
-docker exec -t postgres132_db_1 psql -U $TO_DB -d $TO_DB < "$BASE_DIR/$BACKUP_FILE"
+docker exec -t postgres132_db_1 psql -U $TO_DB -d $TO_DB -f "/tmp/$BACKUP_FILE"
 echo "ALTER SCHEMA $FROM_DB RENAME TO $TO_DB;" | docker exec -i postgres132_db_1 psql -U $TO_DB 
 echo "REASSIGN OWNED BY $FROM_DB TO $TO_DB;" | docker exec -i postgres132_db_1 psql -U @TO_DB 
-docker start $FROM_DB
 docker start $TO_DB
+rm $BACKUP_FILE
