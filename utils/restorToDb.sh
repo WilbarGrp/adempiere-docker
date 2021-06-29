@@ -8,7 +8,7 @@ BASE_DIR=$(cd "$(dirname "$0")"; pwd)
 
 myFileName=db-bck-$(date +%d-%m-%y).sql
 
-BACKUP_FILE="Thursday_LiveDbBackup.sql.gz"
+BACKUP_FILE="Tuesday_LiveDbBackup.sql.gz"
 echo "We will restor $BACKUP_FILE"
 URL="https://fs.piscinetrendium.com:7443/"$BACKUP_FILE
 USER_PSSWD="mike:RoadBike401"
