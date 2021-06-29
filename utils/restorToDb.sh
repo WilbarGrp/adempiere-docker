@@ -41,7 +41,7 @@ docker stop $TO_DB
 docker stop postgres132_db_1
 docker start postgres132_db_1
 docker exec -it postgres132_db_1 dropdb -U $TO_DB $TO_DB
-docker exec -it postgres132_db_1 createdb -U $TO_DB -E unicode $TO_DB
+docker exec -it postgres132_db_1 createdb -U $TO_DB $TO_DB -E unicode
 
 docker exec -t postgres132_db_1 psql -U $TO_DB -d $TO_DB -f "/tmp/$BACKUP_FILE"
 echo "ALTER SCHEMA $FROM_DB RENAME TO $TO_DB;" | docker exec -i postgres132_db_1 psql -U $TO_DB 
