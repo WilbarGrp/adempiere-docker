@@ -74,9 +74,12 @@ if ((docker network inspect -f '{{.Name}}' custom) -ne "custom"){
 }
 
 #$PG_VERSION = "$env:PG_VERSION".Replace(".",'')
-#$env:PG_VERSION = $PG_VERSION
-#Write-Output "$PG_VERSION"
+$PG_VERSION = "$env:PG_VERSION"
+$env:PG_VERSION = "$env:PG_VERSION".Replace(".",'')
+Write-Output "----------------------------------------------"
+Write-Output "$PG_VERSION"
 Write-Output $env:PG_VERSION
+Write-Output "----------------------------------------------"
 
 $RUNNING=docker inspect --format="{{.State.Running}}" postgres"$env:PG_VERSION"_db_1
 if ($RUNNING -eq ""){
