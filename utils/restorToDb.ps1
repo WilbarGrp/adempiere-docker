@@ -11,7 +11,7 @@ $BASE_DIR=Get-Location
 
 $myFileName="db-bck-" + (Get-Date -UFormat "%d-%m-%y") + ".sql"
 
-$BACKUP_FILE="Thursday_LiveDbBackup.sql.gz"
+$BACKUP_FILE="Wednesday_LiveDbBackup.sql.gz"
 $BACKUP_FILE2=$BACKUP_FILE.Replace(".gz","")
 Write-Output "We will restor $BACKUP_FILE"
 $URL="https://fs.piscinetrendium.com:7443/$BACKUP_FILE"
