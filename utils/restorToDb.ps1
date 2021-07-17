@@ -43,8 +43,8 @@ if (Test-Path -Path $BASE_DIR){
     Remove-Item $BACKUP_FILE
  }
 
-Write-Output "backup actual db just in case ;-)"
-docker exec -t postgres132_db_1 pg_dump -U $TO_DB $TO_DB --no-owner > ./$myFileName
+# Write-Output "backup actual db just in case ;-)"
+# docker exec -t postgres132_db_1 pg_dump -U $TO_DB $TO_DB --no-owner > ./$myFileName
 
 docker stop $TO_DB
 docker stop postgres132_db_1
