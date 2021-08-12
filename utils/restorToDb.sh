@@ -10,7 +10,7 @@ myFileName=db-bck-$(date +%d-%m-%y).sql
 
 BACKUP_FILE="Tuesday_LiveDbBackup.sql.gz"
 echo "We will restor $BACKUP_FILE"
-URL="https://fs.piscinetrendium.com:7443/"$BACKUP_FILE
+URL="https://fs.piscinetrendium.com:7443/Tuesday_LiveDbBackup.sql.gz"$BACKUP_FILE
 USER_PSSWD="mike:RoadBike401"
 if [ -d "$BASE_DIR" ]
 then
@@ -19,7 +19,7 @@ then
        echo "Backup to restor already exist we will restor from that file $BACKUP_FILE"
     else
        echo "Download from $URL"
-       curl -u $USER_PSSWD -L $URL > $BACKUP_FILE
+       curl -k -u "mike:RoadBike401" -L "https://fs.piscinetrendium.com:7443/Tuesday_LiveDbBackup.sql.gz" > "Tuesday_LiveDbBackup.sql.gz"
        if [ -f "$BACKUP_FILE" ]
        then
          echo "Db Backup download successful"
