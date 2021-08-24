@@ -27,6 +27,7 @@ ENV AD_DB_Init $AD_DB_Init
 COPY $ADEMPIERE_SRC_DIR/$ADEMPIERE_BINARY /tmp
 COPY $ADEMPIERE_SRC_DIR/lib /tmp/lib
 COPY $ADEMPIERE_SRC_DIR/migration /tmp/migration
+COPY $ADEMPIERE_SRC_DIR/migration/393lts-394lts /tmp/migration/393lts-394lts
 COPY $ADEMPIERE_SRC_DIR/packages /tmp/packages
 COPY ./adempiere-last/start-adempiere.sh /root
 COPY ./adempiere-last/define-ad-ctl.sh /root
@@ -37,6 +38,7 @@ mv Adempiere /opt/Adempiere && \
 mv /tmp/lib/*.* /opt/Adempiere/lib && \
 mv /tmp/packages /opt/Adempiere/packages && \
 mv /tmp/migration/ZWG_0.1 /opt/Adempiere/migration && \
+mv /tmp/migration/393lts-394lts/*.* /opt/Adempiere/migration/393lts-394lts && \
 chmod -Rf 755 /opt/Adempiere/*.sh && \
 chmod -Rf 755 /opt/Adempiere/utils/*.sh && \
 
