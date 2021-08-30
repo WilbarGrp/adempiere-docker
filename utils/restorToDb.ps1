@@ -29,7 +29,7 @@ if (Test-Path -Path $BASE_DIR){
        $host.ui.RawUI.ForegroundColor = "Red"
        Write-Output "Ctrl+v to past the password"
        $host.ui.RawUI.ForegroundColor = $t
-       Invoke-RestMethod -Uri $URL -OutFile $BACKUP_FILE -Credential mike
+       Invoke-RestMethod -SkipCertificateCheck -Uri $URL -OutFile $BACKUP_FILE -Credential mike
        if (Test-Path -LiteralPath "$BACKUP_FILE"){
         Write-Output "Db Backup download successful"
         }

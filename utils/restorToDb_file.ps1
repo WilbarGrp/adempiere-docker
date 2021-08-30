@@ -10,7 +10,7 @@ $fileToRestor=$args[2]
 $BASE_DIR=Get-Location
 
 
-$myFileName="db-bck-" + (Get-Date -UFormat "%d-%m-%y") + ".sql"
+# $myFileName="db-bck-" + (Get-Date -UFormat "%d-%m-%y") + ".sql"
 
 # Write-Output "backup actual db just in case ;-)"
 # docker exec -t postgres132_db_1 pg_dump -U $TO_DB $TO_DB --no-owner > ./$myFileName

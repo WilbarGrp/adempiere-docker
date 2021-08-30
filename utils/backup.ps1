@@ -3,8 +3,11 @@ if (!$args[0]){
     exit 1
 }
 $db=$args[0]
-
-$myFileName= $args[0] + "-bck-" + (Get-Date -UFormat "%d-%m-%y") + ".sql"
+$prefix= $args[0]
+if ($args[1]){
+    $prefix = $args[0] + "_" + $args[1] + "_"   
+}
+$myFileName= $prefix + "-bck-" + (Get-Date -UFormat "%d-%m-%y") + ".sql"
 
 Write-Output "create the backup "
 docker exec -i postgres132_db_1 pg_dump -U $db $db --no-owner -Z 9 > $myFileName

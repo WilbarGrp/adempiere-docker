@@ -5,7 +5,7 @@ then
     exit 1
 fi
 db=$1
-myFileName=$db"-bck-"$(date +%A).sql
+myFileName=$db"-bck-"$(date +%A).sql.tar.gz
 echo $myFileName
 
 echo "create the backup "
