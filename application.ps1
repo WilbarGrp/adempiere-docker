@@ -75,7 +75,7 @@ if ((docker network inspect -f '{{.Name}}' custom) -ne "custom"){
 
 #$PG_VERSION = "$env:PG_VERSION".Replace(".",'')
 $PG_VERSION = "$env:PG_VERSION"
-$env:PG_VERSION = "$env:PG_VERSION".Replace(".",'')
+#$env:PG_VERSION = "$env:PG_VERSION".Replace(".",'')
 Write-Output "----------------------------------------------"
 Write-Output "$PG_VERSION"
 Write-Output $env:PG_VERSION
