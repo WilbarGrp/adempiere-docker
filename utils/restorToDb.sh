@@ -3,14 +3,24 @@ set -x #echo on
 
 FROM_DB=$1 #SAME AS adempiere tenant name
 TO_DB=$2 #SAME AS adempiere tenant name
+DB_TO_RESTOR=$3 
+
+if [ "$DB_TO_RESTOR" = "live"]
 
 BASE_DIR=$(cd "$(dirname "$0")"; pwd)
 
 myFileName=db-bck-$(date +%d-%m-%y).sql
 
-BACKUP_FILE="Tuesday_LiveDbBackup.sql.gz"
+#BACKUP_FILE="Tuesday_LiveDbBackup.sql.gz"
+BACKUP_FILE="zwg-db.gz"
+
+if [ "$DB_TO_RESTOR" = "live"] 
+then
+	$BACKUP_FILE="liveDB.gz"
+fi
+
 echo "We will restor $BACKUP_FILE"
-URL="https://fs.piscinetrendium.com:7443/Tuesday_LiveDbBackup.sql.gz"$BACKUP_FILE
+URL="https://fs.piscinetrendium.com:7443/$BACKUP_FILE"
 USER_PSSWD="mike:RoadBike401"
 if [ -d "$BASE_DIR" ]
 then
@@ -19,7 +29,7 @@ then
        echo "Backup to restor already exist we will restor from that file $BACKUP_FILE"
     else
        echo "Download from $URL"
-       curl -k -u "mike:RoadBike401" -L "https://fs.piscinetrendium.com:7443/Tuesday_LiveDbBackup.sql.gz" > "Tuesday_LiveDbBackup.sql.gz"
+       curl -k -u "mike:RoadBike401" -L "$URL" > "$BACKUP_FILE"
        if [ -f "$BACKUP_FILE" ]
        then
          echo "Db Backup download successful"
