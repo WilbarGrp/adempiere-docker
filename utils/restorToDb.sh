@@ -1,6 +1,15 @@
 #!/bin/bash 
 set -x #echo on
 
+if [[ $# -ne 3 ]]; then
+	    echo "Illegal number of parameters"
+		echo ./restor wilbar zwg live  or
+		echo ./restor wilbar zwg play or
+
+	        exit 2
+fi
+
+
 FROM_DB=$1 #SAME AS adempiere tenant name
 TO_DB=$2 #SAME AS adempiere tenant name
 DB_TO_RESTOR=$3 
